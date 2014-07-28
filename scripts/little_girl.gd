@@ -19,8 +19,10 @@ func _fixed_process(delta):
 	var closest = 1000
 	var hero_pos = null
 	for pos in positions:
-		if curr.distance_to(pos) < closest:
+		var dist = curr.distance_to(pos)
+		if dist < closest:
 			hero_pos = pos
+			closest = dist
 			
 	var magnitude = delta * speed
 	var vdiff = hero_pos - get_pos()

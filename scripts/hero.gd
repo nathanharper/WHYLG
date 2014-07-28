@@ -69,8 +69,6 @@ func fire_weapon():
 		blt.set("angle", get_rot())
 		blt.set("speed", 500)
 		get_node("/root").add_child(blt)
-		PS2D.body_add_collision_exception(get_rid(), blt.get_rid())
-		PS2D.body_add_collision_exception(blt.get_rid(), get_rid())
 		
 		
 func get_bullet_pos():
