@@ -6,6 +6,7 @@ export var hits = 2
 
 var bullet = preload("res://scripts/bullet.gd")
 var hero = preload("res://scripts/hero.gd")
+var death = preload("res://scenes/lg_death.scn")
 
 func _ready():
 	set_fixed_process(true)
@@ -19,10 +20,13 @@ func _fixed_process(delta):
 	var closest = 1000
 	var hero_pos = null
 	for pos in positions:
+		if pos == null:
+			continue
 		var dist = curr.distance_to(pos)
 		if dist < closest:
 			hero_pos = pos
 			closest = dist
+			
 			
 	var magnitude = delta * speed
 	var vdiff = hero_pos - get_pos()
@@ -50,6 +54,9 @@ func _on_Area2D_body_enter( body ):
 		body.queue_free()
 		hits -= 1
 		if hits == 0:
+			var dt = death.instance()
+			dt.set_pos(get_pos())
+			get_node("/root").add_child(dt)
 			queue_free()
 	elif body extends hero:
 		print("YOU DEAD")
