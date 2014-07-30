@@ -45,14 +45,17 @@ func _fixed_process(delta):
 		
 	
 func _input(event):
-	if event.is_action("ud_1"):
-		ud1 = normal(event.value)
-	elif event.is_action("lr_1"):
-		lr1 = normal(event.value)
-	elif event.is_action("ud_2"):
-		ud2 = normal(event.value)
-	elif event.is_action("lr_2"):
-		lr2 = normal(event.value)
+	if event.type == InputEvent.JOYSTICK_MOTION:
+		if event.is_action("ud_1"):
+			ud1 = normal(event.value)
+		elif event.is_action("lr_1"):
+			lr1 = normal(event.value)
+		elif event.is_action("ud_2"):
+			ud2 = normal(event.value)
+		elif event.is_action("lr_2"):
+			lr2 = normal(event.value)
+	elif event.type == InputEvent.KEY:
+		pass
 		
 func normal(num):
 	if abs(num) >= threshold:
